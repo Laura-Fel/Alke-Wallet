@@ -1,5 +1,5 @@
 /* ===============================
-   RESET
+   RESET GLOBAL
    =============================== */
 * {
   margin: 0;
@@ -8,23 +8,38 @@
 }
 
 /* ===============================
-   VARIABLES (IDENTIDAD VISUAL)
+   VARIABLES DE DISEÑO
    =============================== */
 :root {
-  --primary: #4f46e5;       /* violeta fintech */
-  --secondary: #06b6d4;     /* acento cyan */
-  --bg-light: #f5f7fb;
+  --primary: #4f46e5;
+  --secondary: #06b6d4;
+  --bg: #f2f4f7;
   --card-bg: #ffffff;
   --text-main: #1f2933;
   --text-muted: #6b7280;
   --radius: 14px;
+
+  /* Forzar misma tipografía incluso con Bootstrap */
+  --bs-body-font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 /* ===============================
-   BASE
+   BASE / TIPOGRAFÍA ÚNICA
    =============================== */
+html {
+  font-size: 16px;
+}
+
+body,
+input,
+button,
+label,
+select,
+textarea {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
 body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
   background: linear-gradient(180deg, #eef2ff, #f8fafc);
   color: var(--text-main);
   min-height: 100vh;
@@ -37,14 +52,10 @@ body {
    =============================== */
 header,
 footer {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #ffffff;
   text-align: center;
   padding: 1.2rem;
-  color: #ffffff;
-  background: linear-gradient(
-    135deg,
-    var(--primary),
-    var(--secondary)
-  );
 }
 
 header h1 {
@@ -52,41 +63,42 @@ header h1 {
   font-weight: 600;
 }
 
+footer {
+  margin-top: auto;
+}
+
 footer p {
   font-size: 0.85rem;
-  color: #ffffff;
-  opacity: 1;
 }
 
 /* ===============================
-   CONTENEDOR PRINCIPAL
+   CONTENEDOR PRINCIPAL (APP)
    =============================== */
-main.container {
+main.app {
   flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 1.2rem;
+  align-items: center;
+  padding: 1.5rem 1rem;
 }
 
 /* ===============================
-   CARD – ESTILO E-WALLET
+   CARD (E-WALLET)
    =============================== */
 .card {
-  background-color: var(--card-bg);
   width: 100%;
   max-width: 420px;
+  background-color: var(--card-bg);
   padding: 2rem 1.6rem;
   border-radius: var(--radius);
-  box-shadow:
-    0 10px 30px rgba(79, 70, 229, 0.15);
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 1.3rem;
+  gap: 1.2rem;
 }
 
 /* ===============================
-   TEXTO
+   TEXTOS
    =============================== */
 h2 {
   font-size: 1.35rem;
@@ -95,7 +107,7 @@ h2 {
 }
 
 p {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text-muted);
   text-align: center;
   line-height: 1.5;
@@ -110,58 +122,54 @@ form {
   gap: 0.9rem;
 }
 
-form label {
-  font-size: 0.85rem;
+label,
+.form-label {
+  font-size: 0.9rem;
   font-weight: 600;
-  color: var(--text-main);
 }
 
-form input {
+input,
+.form-control {
   width: 100%;
-  padding: 0.9rem 1rem;
+  padding: 0.95rem 1rem;
   border-radius: 10px;
   border: 1px solid #d1d5db;
-  font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  font-size: 1rem;
 }
 
-form input:focus {
+input:focus,
+.form-control:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 2px rgba(79,70,229,0.15);
 }
 
 /* ===============================
-   BOTONES – APP STYLE
+   BOTONES
    =============================== */
 button,
+.btn,
 a.btn {
-  margin-top: auto;
-  background: linear-gradient(
-    135deg,
-    var(--primary),
-    var(--secondary)
-  );
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: #ffffff;
-  padding: 0.95rem;
+  padding: 1rem;
   border-radius: 12px;
   border: none;
-  text-align: center;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
 }
 
 button:hover,
+.btn:hover,
 a.btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(79,70,229,0.3);
+  opacity: 0.95;
 }
 
 /* ===============================
-   MENU PRINCIPAL
+   MENÚ PRINCIPAL
    =============================== */
 .menu {
   display: flex;
@@ -170,16 +178,6 @@ a.btn:hover {
 }
 
 .menu a {
-  background: linear-gradient(
-    135deg,
-    var(--primary),
-    var(--secondary)
-  );
-  color: #ffffff;
-  padding: 0.95rem;
-  border-radius: 12px;
-  text-align: center;
-  font-weight: 600;
   text-decoration: none;
 }
 
@@ -194,15 +192,49 @@ ul {
 }
 
 ul li {
-  background-color: var(--bg-light);
-  padding: 0.85rem;
+  background-color: #e5e7eb;
+  padding: 0.9rem;
   border-radius: 10px;
-  font-size: 0.9rem;
-  color: var(--text-main);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+ul {
+  width: 100%;
+}
+
+ul li {
+  width: 100%;
+  text-align: center;
+}
+
+
+/* ===============================
+   MOBILE FIRST REAL
+   =============================== */
+@media (max-width: 480px) {
+  main.app {
+    align-items: flex-start;
+    padding: 1.2rem 1rem;
+  }
+
+  .card {
+    max-width: none;
+    width: 100%;
+    padding: 1.6rem 1.3rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
 }
 
 /* ===============================
-   RESPONSIVE – TABLET
+   TABLET
    =============================== */
 @media (min-width: 768px) {
   .card {
@@ -212,7 +244,7 @@ ul li {
 }
 
 /* ===============================
-   RESPONSIVE – DESKTOP
+   DESKTOP
    =============================== */
 @media (min-width: 1024px) {
   .card {
@@ -222,11 +254,41 @@ ul li {
 }
 
 /* ===============================
-   RESPONSIVE – TV
+   TV / PANTALLAS GRANDES
    =============================== */
 @media (min-width: 1440px) {
   .card {
     max-width: 900px;
     padding: 3rem;
   }
+}
+/* ===============================
+   FIX BOTONES MENU PRINCIPAL
+   =============================== */
+.menu a {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+.menu a:hover {
+  opacity: 0.95;
+}
+
+ul li {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === FORZAR FOOTER LEGIBLE === */
+footer,
+footer p {
+  color: #ffffff !important;
+  opacity: 1 !important;
 }
