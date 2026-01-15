@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (depositForm) {
     depositForm.addEventListener("submit", (e) => {
       e.preventDefault();
+      }
 
       const monto = Number(document.getElementById("amount").value);
     
@@ -44,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
         depositForm.reset();
       }
     });
-  }
 
   /* ======================
      ENVÍO DE DINERO
