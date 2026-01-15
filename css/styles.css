@@ -39,12 +39,11 @@ textarea {
 }
 
 body {
-  background: linear-gradient(180deg, #eef2ff, #f8fafc);
-  color: var(--text-main);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
+
 
 /* ===============================
    HEADER
@@ -72,6 +71,8 @@ footer {
 }
 
 footer p {
+  margin: 0;
+  color: #ffffff;
   font-size: 0.85rem;
   opacity: 1;
 }
@@ -81,7 +82,10 @@ footer p {
    =============================== */
 main.app {
   flex: 1;
-  padding: 1.5rem 1rem; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
 /* ===============================
@@ -90,14 +94,12 @@ main.app {
 .card,
 .app-card {
   width: 100%;
-  background-color: var(--card-bg);
-  padding: 1.6rem;
-  border-radius: var(--radius);
-  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.15);
+  max-width: 420px;
+  padding: 1.5rem;
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  margin: 0 auto;         /* 🔑 SOLO centrado horizontal */
+  gap: 1rem;
 }
 
 /* ===============================
@@ -216,44 +218,25 @@ ul li {
 }
 
 /* ============================
-   MOBILE APP FIX (SIN CORTE)
+   MOBILE FIRST
    ============================ */
-@media (max-width: 480px) {
-
-  body {
-    overflow-x: hidden;
-  }
-
-  main.app {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;   
-    padding: 0.75rem;
-  }
-
+@media (max-width: 360px) {
   .app-card {
-    width: 100%;
-    max-width: 100%;
-    padding: 1.2rem;         
-    gap: 0.8rem;
+    padding: 1.25rem;
+    gap: 0.75rem;
   }
 
   h2 {
-    font-size: 1.2rem;       
+    font-size: 1.2rem;
   }
 
-  p {
-    font-size: 0.95rem;
-  }
-
-  button,
   .btn {
-    padding: 0.75rem;       
+    padding: 0.75rem;
     font-size: 0.95rem;
   }
-
 }
+
+
 /* ===============================
    TABLET
    =============================== */

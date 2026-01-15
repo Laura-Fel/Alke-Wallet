@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const user = document.getElementById("user").value;
       const pass = document.getElementById("pass").value;
 
-      if (user === "admin" && pass === "1234") {
+      if (user === "hola@ejemplo.com" && pass === "1234") {
         alert("Ingreso exitoso");
         window.location.href = "menu.html";
       } else {
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const monto = Number(document.getElementById("amount").value);
-
+    
       if (monto > 0) {
         saldo += monto;
         transacciones.push(`Depósito de $${monto}`);
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       transacciones.forEach(t => {
         const li = document.createElement("li");
         li.textContent = t;
-        list.appendChild(li);
+        list.appendChild(li);                      
       });
     }
   }
