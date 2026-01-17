@@ -61,6 +61,30 @@ header h1 {
 }
 
 /* ===============================
+   NAVBAR MENU - BOTONES
+   =============================== */
+
+.navbar .nav-link {
+  color: #0db4e7 !important;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover */
+.navbar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff !important;
+}
+
+/* Activo (opcional) */
+.navbar .nav-link.active {
+  background-color: #ffffff;
+  color: var(--primary) !important;
+}
+
+/* ===============================
    FOOTER (FLUIDO, NO FORZADO)
    =============================== */
 footer {
@@ -222,22 +246,41 @@ ul li {
 /* ============================
    MOBILE FIRST
    ============================ */
+/* ============================
+   MOBILE OPTIMIZED (320–360px)
+   ============================ */
 @media (max-width: 360px) {
+
+  main.app {
+    padding: 0.75rem;
+  }
+
   .app-card {
-    padding: 1.25rem;
+    max-width: 100%;
+    padding: 1rem;
     gap: 0.75rem;
   }
 
   h2 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
 
   .btn {
-    padding: 0.75rem;
-    font-size: 0.95rem;
+    padding: 0.65rem;
+    font-size: 0.9rem;
+  }
+
+  input,
+  .form-control {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.9rem;
   }
 }
-
 
 /* ===============================
    TABLET
@@ -269,3 +312,89 @@ ul li {
   }
 }
 
+/* ===============================
+   DASHBOARD MENU
+   =============================== */
+@media (max-width: 360px) {
+
+  .app-card-dashboard {
+    padding: 1rem;
+    gap: 0.6rem;
+  }
+
+  .app-card-dashboard h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .app-card-dashboard .row {
+    --bs-gutter-x: 0.5rem;
+    --bs-gutter-y: 0.5rem;
+  }
+
+  .app-card-dashboard .border {
+    padding: 0.6rem !important;
+  }
+
+  .app-card-dashboard h6 {
+    font-size: 0.75rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .app-card-dashboard p {
+    font-size: 0.9rem !important;
+    margin: 0;
+  }
+
+}
+
+/* ===============================
+   DASHBOARD MENU – MOBILE FIRST
+   =============================== */
+.app-card-dashboard {
+  gap: 1rem;
+}
+
+/* Tarjetas financieras */
+.app-card-dashboard .border {
+  background-color: #f8fafc;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px;
+}
+
+/* Texto de las tarjetas */
+.app-card-dashboard h6 {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+/* Valores principales */
+.app-card-dashboard p {
+  margin: 0;
+  font-weight: 700;
+}
+
+/* ============================
+   DASHBOARD MOBILE (≤360px)
+   ============================ */
+@media (max-width: 360px) {
+
+  .app-card-dashboard {
+    padding: 1rem;
+    gap: 0rem;
+  }
+
+  .app-card-dashboard .row {
+    gap: 0.5rem;
+  }
+
+  .app-card-dashboard .border {
+    padding: 0.75rem !important;
+  }
+
+  .app-card-dashboard p.fs-4 {
+    font-size: 1.2rem !important;
+  }
+}
