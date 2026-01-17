@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Estado global simulado
   let saldo = 1000000;
   let transacciones = [];
+})
 
   /* ======================
      LOGIN
@@ -33,20 +34,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (depositForm) {
     depositForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      }
+    e.preventDefault();
 
-      const monto = Number(document.getElementById("amount").value);
-    
-      if (monto > 0) {
-        saldo += monto;
-        transacciones.push(`Depósito de $${monto}`);
-        alert(`Depósito realizado. Nuevo saldo: $${saldo}`);
-        depositForm.reset();
-      }
-    });
+    const monto = Number(document.getElementById("amount").value);
 
-  /* ======================
+    if (monto > 0) {
+      saldo += monto;
+      transacciones.push(`Depósito de $${monto}`);
+      alert(`Depósito realizado. Nuevo saldo: $${saldo}`);
+      depositForm.reset();
+
+      // redirige al menú (opcional pero recomendado)
+      window.location.href = "menu.html";
+    } else {
+      alert("Ingresa un monto válido");
+    }
+  });
+}
+
+/* ======================
      ENVÍO DE DINERO
   ====================== */
   const sendForm = document.getElementById("sendForm");
@@ -89,4 +95,3 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
-});
