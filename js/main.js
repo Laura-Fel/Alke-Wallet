@@ -20,9 +20,9 @@ $(document).ready(function () {
     localStorage.setItem("transacciones", JSON.stringify(transacciones));
   }
 
-  /* ======================
-     LOGIN
-  ====================== */
+  // ======================
+  // LOGIN
+  // ======================
   $("#loginForm").on("submit", function (e) {
     e.preventDefault();
 
@@ -37,9 +37,9 @@ $(document).ready(function () {
     }
   });
 
-  /* ======================
-     DEPÓSITO
-  ====================== */
+  // ======================
+  // DEPÓSITO
+  // ======================
   $("#depositForm").on("submit", function (e) {
     e.preventDefault();
 
@@ -51,15 +51,17 @@ $(document).ready(function () {
       transacciones.push(`Depósito de $${monto}`);
       guardarEstado();
 
-      alert(`Transferencia realizada. Saldo restante: $${saldo}`);
+      alert(`Depósito realizado. Nuevo saldo: $${saldo}`);
       this.reset();
       window.location.href = "menu.html";
+    } else {
+      alert("Ingresa un monto válido");
     }
   });
 
-  /* ======================
-     ENVÍO DE DINERO
-  ====================== */
+  // ======================
+  // ENVÍO DE DINERO
+  // ======================
   $("#sendForm").on("submit", function (e) {
     e.preventDefault();
 
@@ -74,25 +76,24 @@ $(document).ready(function () {
 
       alert(`Transferencia realizada. Saldo restante: $${saldo}`);
       this.reset();
-      window.location.href = "menu.html"
+      window.location.href = "menu.html";
     } else {
       alert("Saldo insuficiente");
-      window.location.href = "menu.html";
     }
   });
 
-  /* ======================
-     MENU
-  ====================== */
+  // ======================
+  // MENU
+  // ======================
   if ($("#saldo").length) {
     $("#saldo").text(`$${saldo.toLocaleString()}`);
     $("#ingresos").text(`$${ingresos.toLocaleString()}`);
     $("#gastos").text(`$${gastos.toLocaleString()}`);
   }
 
-  /* ======================
-     TRANSACCIONES
-  ====================== */
+  // ======================
+  // TRANSACCIONES
+  // ======================
   if ($("#transactionsList").length) {
     $("#transactionsList").empty();
 
@@ -105,8 +106,8 @@ $(document).ready(function () {
     }
   }
 
-  /* ======================
-     ANIMACIONES JQUERY
-  ====================== */
+  // ======================
+  // ANIMACIONES
+  // ======================
   $(".app-card").hide().fadeIn(500);
 });
