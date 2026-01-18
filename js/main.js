@@ -74,6 +74,7 @@ $(document).ready(function () {
 
       alert(`Transferencia realizada. Saldo restante: $${saldo}`);
       this.reset();
+      window.location.href = "menu.html"
     } else {
       alert("Saldo insuficiente");
       window.location.href = "menu.html";
