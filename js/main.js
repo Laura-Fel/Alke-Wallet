@@ -1,97 +1,113 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* ===============================
+   ALKE WALLET - MAIN JS
+   =============================== */
+
+$(document).ready(function () {
   console.log("Alke Wallet JS cargado correctamente");
 
-  // Estado global simulado
-  let saldo = 1000000;
-  let transacciones = [];
-})
+  // ======================
+  // ESTADO GLOBAL
+  // ======================
+  let saldo = Number(localStorage.getItem("saldo")) || 1000000;
+  let ingresos = Number(localStorage.getItem("ingresos")) || 0;
+  let gastos = Number(localStorage.getItem("gastos")) || 0;
+  let transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
 
-  /* ======================
-     LOGIN
-  ====================== */
-  const loginForm = document.getElementById("loginForm");
-
-  if (loginForm) {
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const user = document.getElementById("user").value;
-      const pass = document.getElementById("pass").value;
-
-      if (user === "hola@ejemplo.com" && pass === "1234") {
-        alert("Ingreso exitoso");
-        window.location.href = "menu.html";
-      } else {
-        alert("Usuario o contraseña incorrectos");
-      }
-    });
+  function guardarEstado() {
+    localStorage.setItem("saldo", saldo);
+    localStorage.setItem("ingresos", ingresos);
+    localStorage.setItem("gastos", gastos);
+    localStorage.setItem("transacciones", JSON.stringify(transacciones));
   }
 
-  /* ======================
-     DEPÓSITO
-  ====================== */
-  const depositForm = document.getElementById("depositForm");
-
-  if (depositForm) {
-    depositForm.addEventListener("submit", (e) => {
+  // ======================
+  // LOGIN
+  // ======================
+  $("#loginForm").on("submit", function (e) {
     e.preventDefault();
 
-    const monto = Number(document.getElementById("amount").value);
+    const user = $("#user").val();
+    const pass = $("#pass").val();
+
+    if (user === "admin" && pass === "1234") {
+      alert("Ingreso exitoso");
+      window.location.href = "menu.html";
+    } else {
+      alert("Usuario o contraseña incorrectos");
+    }
+  });
+
+  // ======================
+  // DEPÓSITO
+  // ======================
+  $("#depositForm").on("submit", function (e) {
+    e.preventDefault();
+
+    const monto = Number($("#amount").val());
 
     if (monto > 0) {
       saldo += monto;
+      ingresos += monto;
       transacciones.push(`Depósito de $${monto}`);
-      alert(`Depósito realizado. Nuevo saldo: $${saldo}`);
-      depositForm.reset();
+      guardarEstado();
 
-      // redirige al menú (opcional pero recomendado)
+      alert(`Depósito realizado. Nuevo saldo: $${saldo}`);
+      this.reset();
       window.location.href = "menu.html";
     } else {
       alert("Ingresa un monto válido");
     }
   });
-}
 
-/* ======================
-     ENVÍO DE DINERO
-  ====================== */
-  const sendForm = document.getElementById("sendForm");
+  // ======================
+  // ENVÍO DE DINERO
+  // ======================
+  $("#sendForm").on("submit", function (e) {
+    e.preventDefault();
 
-  if (sendForm) {
-    sendForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+    const contacto = $("#contact").val();
+    const monto = Number($("#amount").val());
 
-      const contacto = document.getElementById("contact").value;
-      const monto = Number(document.getElementById("amount").value);
+    if (monto > 0 && monto <= saldo) {
+      saldo -= monto;
+      gastos += monto;
+      transacciones.push(`Envío de $${monto} a ${contacto}`);
+      guardarEstado();
 
-      if (monto > 0 && monto <= saldo) {
-        saldo -= monto;
-        transacciones.push(`Envío de $${monto} a ${contacto}`);
-        alert(`Transferencia realizada. Saldo restante: $${saldo}`);
-        sendForm.reset();
-      } else {
-        alert("Saldo insuficiente");
-      }
-    });
+      alert(`Transferencia realizada. Saldo restante: $${saldo}`);
+      this.reset();
+      window.location.href = "menu.html";
+    } else {
+      alert("Saldo insuficiente");
+    }
+  });
+
+  // ======================
+  // MENU
+  // ======================
+  if ($("#saldo").length) {
+    $("#saldo").text(`$${saldo.toLocaleString()}`);
+    $("#ingresos").text(`$${ingresos.toLocaleString()}`);
+    $("#gastos").text(`$${gastos.toLocaleString()}`);
   }
 
-  /* ======================
-     TRANSACCIONES
-  ====================== */
-  const list = document.getElementById("transactionsList");
-
-  if (list) {
-    list.innerHTML = "";
+  // ======================
+  // TRANSACCIONES
+  // ======================
+  if ($("#transactionsList").length) {
+    $("#transactionsList").empty();
 
     if (transacciones.length === 0) {
-      const li = document.createElement("li");
-      li.textContent = "No hay transacciones registradas";
-      list.appendChild(li);
+      $("#transactionsList").append("<li>No hay transacciones registradas</li>");
     } else {
       transacciones.forEach(t => {
-        const li = document.createElement("li");
-        li.textContent = t;
-        list.appendChild(li);                      
+        $("#transactionsList").append(`<li>${t}</li>`);
       });
     }
   }
+
+  // ======================
+  // ANIMACIONES
+  // ======================
+  $(".app-card").hide().fadeIn(500);
+});
